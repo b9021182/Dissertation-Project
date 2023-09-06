@@ -237,40 +237,30 @@ plt.show()
 # Feature Importance Analysis
 feature_importance = pd.DataFrame(index=X.columns)
 
-# AdaBoost
 ab_model.fit(X, Y)
 ab_feature_importance = ab_model.feature_importances_
 feature_importance['AdaBoost'] = ab_feature_importance
 
-# Decision Tree
 dt_model.fit(X, Y)
 dt_feature_importance = dt_model.feature_importances_
 feature_importance['Decision Tree'] = dt_feature_importance
 
-# Naive Bayes (No feature importance available)
 feature_importance['Naive Bayes'] = np.nan
 
-# Random Forest
 rf_model.fit(X, Y)
 rf_feature_importance = rf_model.feature_importances_
 feature_importance['Random Forest'] = rf_feature_importance
 
-# SVM (No feature importance available)
 feature_importance['Support Vector Machine'] = np.nan
 
-# Neural Network (No feature importance available)
 feature_importance['Neural Network'] = np.nan
 
-# K-Nearest Neighbors (No feature importance available)
 feature_importance['K-Nearest Neighbors'] = np.nan
 
-# Save feature importance to a CSV file
 feature_importance.to_csv('feature_importance.csv')
 
-# Create an empty dictionary to store the FPR and TPR for each model
 roc_data = {}
 
-# Models to evaluate
 models = {
     'AdaBoost': ab_model,
     'Decision Tree': dt_model,
@@ -280,7 +270,6 @@ models = {
     'K-Nearest Neighbors': kn_model,
 }
 
-# Plot ROC curves for each model separately
 for model_name, model in models.items():
     plt.figure(figsize=(6, 6))
     fpr, tpr, auc_score = calculate_roc_auc(model, x_test, y_test)
